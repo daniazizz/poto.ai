@@ -1,20 +1,35 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import {
+  NativeBaseProvider,
+  Text,
+  Box,
+  Button,
+  Avatar,
+  Image,
+  KeyboardAvoidingView,
+  Center,
+  VStack,
+} from "native-base";
+import MainScreen from "./app/screens/MainScreen";
+import { Platform, SafeAreaView, View } from "react-native";
 
 export default function App() {
+  // 2. Use at the root of your app
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NativeBaseProvider>
+      <SafeAreaView>
+        <KeyboardAvoidingView
+          h={{
+            base: "100%",
+            lg: "auto",
+          }}
+          p={4}
+          bgColor={"gray.600"}
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+        >
+          <MainScreen />
+        </KeyboardAvoidingView>
+      </SafeAreaView>
+    </NativeBaseProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
