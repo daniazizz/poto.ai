@@ -1,42 +1,32 @@
 import React from "react";
 import ConversationItem from "./ConversationItem";
-import { VStack } from "native-base";
+import { Box, FlatList, VStack } from "native-base";
+import { View } from "react-native";
+import { ConversationItemType } from "./ChatLayout";
 
-const convs = [
-  {
-    name: "ai",
-    messages:
-      "Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Phasellus magna. Praesent ut ligula non mi varius sagittis. Fusce a quam. Fusce convallis metus id felis luctus adipiscing.",
-  },
-  {
-    name: "user",
-    messages:
-      "Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Phasellus magna. Praesent ut ligula non mi varius sagittis. Fusce a quam. Fusce convallis metus id felis luctus adipiscing.",
-  },
-  {
-    name: "ai",
-    messages:
-      "Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Phasellus magna. Praesent ut ligula non mi varius sagittis. Fusce a quam. Fusce convallis metus id felis luctus adipiscing.",
-  },
-  {
-    name: "user",
-    messages:
-      "Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Phasellus magna. Praesent ut ligula non mi varius sagittis. Fusce a quam. Fusce convallis metus id felis luctus adipiscing.",
-  },
-  {
-    name: "ai",
-    messages:
-      "Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Phasellus magna. Praesent ut ligula non mi varius sagittis. Fusce a quam. Fusce convallis metus id felis luctus adipiscing.",
-  },
-];
+interface Props {
+  conversationItems: ConversationItemType[];
+  scrollRef: React.RefObject<typeof FlatList>;
+}
 
-const ConversationList = () => {
+const ConversationList = (props: Props) => {
   return (
-    <VStack space="5">
-      {convs.map((conv, index) => (
-        <ConversationItem key={index} />
-      ))}
-    </VStack>
+    // <VStack space={3} alignItems={"flex-start"}>
+    props.conversationItems.length > 0 ? (
+      <FlatList
+        ref={props.scrollRef}
+        data={props.conversationItems}
+        renderItem={({ item, index }) => (
+          <Box mb={2}>
+            <ConversationItem key={index} conversationItem={item} />
+          </Box>
+        )}
+      />
+    ) : (
+      <Box flex={1} />
+    )
+
+    // </VStack>
   );
 };
 
