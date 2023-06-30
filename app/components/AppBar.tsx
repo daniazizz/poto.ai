@@ -2,6 +2,7 @@ import { Avatar, Box, Divider, HStack, Heading, Text } from "native-base";
 import React from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import Logo from "./common/logo";
+import { Pressable } from "react-native";
 
 const AppBar = () => {
   return (
@@ -19,22 +20,24 @@ const AppBar = () => {
         </Heading> */}
 
         <HStack space="3" alignItems="center">
-          <Box
-            bg="gray.600"
-            p={2}
-            px={3}
-            borderRadius={"40%"}
-            display={"flex"}
-            flexDirection={"row"}
-            style={{ gap: 10 }}
-            alignItems={"center"}
-          >
-            <Text fontSize="sm" color={"white"} fontWeight={700}>
-              999
-            </Text>
-            {/* <MaterialIcons name="auto-awesome" size={24} color="white" /> */}
-            <MaterialIcons name="confirmation-num" size={18} color="white" />
-          </Box>
+          <Pressable onPress={() => {}}>
+            <Box
+              bg="gray.600"
+              p={2}
+              px={3}
+              borderRadius={40}
+              display={"flex"}
+              flexDirection={"row"}
+              style={{ gap: 10 }}
+              alignItems={"center"}
+            >
+              <Text fontSize="sm" color={"white"} fontWeight={700}>
+                999
+              </Text>
+              {/* <MaterialIcons name="auto-awesome" size={24} color="white" /> */}
+              <MaterialIcons name="confirmation-num" size={18} color="white" />
+            </Box>
+          </Pressable>
 
           {/* <MaterialIcons name="account-circle" size={50} color="white" /> */}
           <MaterialIcons name="settings" size={25} color="white" />
