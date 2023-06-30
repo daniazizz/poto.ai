@@ -1,4 +1,4 @@
-import { HStack } from "native-base";
+import { HStack, Pressable } from "native-base";
 import React from "react";
 import { TextInput } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -7,14 +7,15 @@ interface Props {
   disabled?: boolean;
   onPress?: () => void;
   autoFocus?: boolean;
-  value?: string;
-  onChangeText?: (text: string) => void;
+  value: string;
+  onChangeText: (text: string) => void;
 }
 
 const SearchBar = (props: Props) => {
   return (
     <HStack
-      bg={"gray.800"}
+      // bg={"gray.800"}
+      bgColor={"white"}
       rounded={"xl"}
       p={2}
       mx={2}
@@ -23,7 +24,7 @@ const SearchBar = (props: Props) => {
     >
       <MaterialIcons name="search" size={24} color="gray" />
       <TextInput
-        style={{ flex: 1, fontSize: 18, color: "white" }}
+        style={{ flex: 1, fontSize: 18, color: "black" }}
         keyboardAppearance="dark"
         placeholder="Search"
         placeholderTextColor={"gray"}
@@ -35,14 +36,11 @@ const SearchBar = (props: Props) => {
         // value={search}
         // onChangeText={handleFilter}
       />
-      {/* {search.length > 0 && (
-        <MaterialIcons
-          name="cancel"
-          size={24}
-          color="gray"
-          onPress={() => setSearch("")}
-        />
-      )} */}
+      {props.value && props.value.length > 0 && (
+        <Pressable onPress={() => props.onChangeText("")}>
+          <MaterialIcons name="cancel" size={24} color="gray" />
+        </Pressable>
+      )}
     </HStack>
   );
 };

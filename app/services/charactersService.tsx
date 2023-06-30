@@ -6,8 +6,14 @@ export interface Character {
   id: string;
   name: string;
   short_description: string;
+  long_description: string;
   life_span: string;
   image?: string;
+  questions: QuestionSuggestion[];
+}
+
+export interface QuestionSuggestion {
+  question: string;
 }
 
 export interface Answer {
@@ -27,17 +33,23 @@ export interface CategoryCharacters {
 }
 
 const getCharacters = () => {
-  return api.get<Character[]>(endpoint);
+  return api.instance.get<Character[]>(endpoint);
 };
 
 const getCharactersByCategory = () => {
-  return api.get<CategoryCharacters[]>(
+  return api.instance.get<CategoryCharacters[]>(
     endpoint + "/get_characters_grouped_categories/"
   );
 };
 
-const askQuestion = (characterId: String, question: string) => {
-  return api.get<Answer>(endpoint + `/${characterId}/ask/?q=${question}`);
+const askQuestion = (characterId: string, question: string, chatId: string) => {
+  // return api.instance.get<Answer>(
+  //   endpoint + `/${characterId}/ask/?q=${question}`
+  // );
+  return api.instance.post<Answer>(endpoint + `/${characterId}/ask/`, {
+    question: question,
+    chat_id: chatId,
+  });
 };
 
 export default {

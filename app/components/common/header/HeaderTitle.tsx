@@ -7,7 +7,7 @@ interface Props {
 
 const HeaderTitle = (props: Props) => {
   return (
-    <Text color={"white"} fontSize={24} fontWeight={"bold"}>
+    <Text fontSize={24} fontWeight={"bold"} color={"white"}>
       {props.title}
     </Text>
   );

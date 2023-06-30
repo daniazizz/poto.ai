@@ -20,10 +20,16 @@ interface Props {
 
 const ChatHeader = (props: Props) => {
   return (
-    <HStack alignItems={"center"} justifyContent={"space-between"} p={4}>
+    <HStack
+      alignItems={"center"}
+      justifyContent={"space-between"}
+      px={4}
+      pb={2}
+      bgColor={"gray.900"}
+    >
       <HStack alignItems="center" space={3} flex={1}>
         <Pressable p={2} onPress={props.handleReturn}>
-          <ChevronLeftIcon size="6" color="white" />
+          <ChevronLeftIcon size={6} color="white" />
         </Pressable>
         <Avatar
           size={"md"}
@@ -38,7 +44,7 @@ const ChatHeader = (props: Props) => {
             {props.selectedCharacter.name}
           </Text>
           <Text
-            fontSize="sm"
+            fontSize="xs"
             color={"white"}
             fontWeight={200}
             fontStyle={"italic"}
@@ -47,10 +53,10 @@ const ChatHeader = (props: Props) => {
           </Text>
         </VStack>
       </HStack>
-      <HStack space="3" alignItems="center">
+      {/* <HStack space="3" alignItems="center">
         <Center bg="primary.400" size="4"></Center>
         <Center bg="secondary.400" size="4"></Center>
-      </HStack>
+      </HStack> */}
     </HStack>
   );
 };
