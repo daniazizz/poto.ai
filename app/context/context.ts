@@ -1,6 +1,7 @@
 import { createContext } from "react";
 import { Chat, ChatMessage } from "../services/chatService";
 import { AppUser } from "../services/userService";
+import { CategoryCharacters, Character } from "../services/charactersService";
 
 interface ChatContextProps {
   chats: Chat[];
@@ -46,4 +47,14 @@ interface BottomBarContextProps {
 export const BottomBarContext = createContext<BottomBarContextProps>({
   bottomTabBarVisible: true,
   setBottomTabBarVisible: () => {},
+});
+
+interface CharacterContextProps {
+  allCharacters: Character[];
+  allCategories: CategoryCharacters[];
+}
+
+export const CharacterContext = createContext<CharacterContextProps>({
+  allCharacters: [],
+  allCategories: [],
 });

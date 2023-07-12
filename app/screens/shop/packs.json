@@ -1,0 +1,22 @@
+{
+  "packs": [
+    {
+      "id": "pack1",
+      "emoji": "🧪",
+      "name": "History Sampler",
+      "amount": 250
+    },
+    {
+      "id": "pack2",
+      "emoji": "🔍",
+      "name": "Historical Explorer",
+      "amount": 750
+    },
+    {
+      "id": "pack3",
+      "emoji": "⌛️",
+      "name": "Time Traveler",
+      "amount": 2000
+    }
+  ]
+}

@@ -19,6 +19,7 @@ export interface QuestionSuggestion {
 export interface Answer {
   answer: string;
   error: string;
+  credits: number;
 }
 
 interface Category {
@@ -42,14 +43,26 @@ const getCharactersByCategory = () => {
   );
 };
 
-const askQuestion = (characterId: string, question: string, chatId: string) => {
+const askQuestion = (
+  characterName: string,
+  question: string,
+  chatId: string
+) => {
   // return api.instance.get<Answer>(
   //   endpoint + `/${characterId}/ask/?q=${question}`
   // );
-  return api.instance.post<Answer>(endpoint + `/${characterId}/ask/`, {
-    question: question,
-    chat_id: chatId,
-  });
+  // return api.instance.post<Answer>(endpoint + `/${characterId}/ask/`, {
+  //   question: question,
+  //   chat_id: chatId,
+  // });
+  return api.instance.post<Answer>(
+    "https://handleask.azurewebsites.net/api/HttpTrigger1",
+    {
+      question: question,
+      character: characterName,
+      chat_id: chatId,
+    }
+  );
 };
 
 export default {

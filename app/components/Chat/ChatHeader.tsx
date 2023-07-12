@@ -12,6 +12,7 @@ import {
 import React from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Character } from "../../services/charactersService";
+import CharacterAvatar from "../common/CharacterAvatar";
 
 interface Props {
   handleReturn: () => void;
@@ -23,22 +24,25 @@ const ChatHeader = (props: Props) => {
     <HStack
       alignItems={"center"}
       justifyContent={"space-between"}
-      px={4}
-      pb={2}
+      p={4}
       bgColor={"gray.900"}
     >
       <HStack alignItems="center" space={3} flex={1}>
         <Pressable p={2} onPress={props.handleReturn}>
           <ChevronLeftIcon size={6} color="white" />
         </Pressable>
-        <Avatar
+        {/* <Avatar
           size={"md"}
           source={{
             uri: props.selectedCharacter.image,
           }}
         >
           {props.selectedCharacter.name[0]}
-        </Avatar>
+        </Avatar> */}
+        <CharacterAvatar
+          image={props.selectedCharacter.image}
+          name={props.selectedCharacter.name}
+        />
         <VStack>
           <Text fontSize="md" color={"white"} fontWeight={600}>
             {props.selectedCharacter.name}

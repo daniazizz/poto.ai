@@ -9,7 +9,7 @@ const HeaderRight = () => {
   const { credits } = useContext(UserDataContext);
   const theme = useTheme();
   return (
-    <HStack space="3" alignItems="center">
+    <HStack space="3" alignItems="center" px={4}>
       <Pressable onPress={() => navigation.navigate({ name: "Shop" } as never)}>
         <Box
           bgColor={"gray.600"}
@@ -25,17 +25,17 @@ const HeaderRight = () => {
             {credits}
           </Text>
           {/* <MaterialIcons name="auto-awesome" size={24} color="white" /> */}
-          <MaterialIcons name="confirmation-num" size={15} color="white" />
+          <MaterialIcons name="confirmation-num" size={18} color="white" />
         </Box>
       </Pressable>
 
       {/* <MaterialIcons name="account-circle" size={50} color="white" /> */}
-      <Pressable
+      {/* <Pressable
         p={2}
         onPress={() => navigation.navigate({ name: "Settings" } as never)}
       >
         <MaterialIcons name="settings" size={25} color="white" />
-      </Pressable>
+      </Pressable> */}
     </HStack>
   );
 };

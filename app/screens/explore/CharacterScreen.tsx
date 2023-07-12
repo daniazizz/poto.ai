@@ -1,42 +1,32 @@
-import React, { useContext } from "react";
-import { VStack, Image, Box, Pressable, Text, ScrollView } from "native-base";
+import React from "react";
+import { VStack, Box, Pressable, Text, ScrollView } from "native-base";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { RouteProp } from "@react-navigation/native";
 import { Character } from "../../services/charactersService";
-import { Chat } from "../../services/chatService";
-import { ChatStackParamList } from "../chat/ChatNavigation";
-import { ExploreStackParamList } from "./ExploreNavigation";
 import { Ionicons } from "@expo/vector-icons";
-import * as Haptics from "expo-haptics";
-import { BottomBarContext } from "../../context/context";
+import FastImage from "react-native-fast-image";
+import { SafeAreaView } from "react-native";
+import { MainStackParamList } from "../../../App";
 
 const CharacterScreen = () => {
   const navigation = useNavigation();
-  const route = useRoute<RouteProp<ExploreStackParamList, "CharacterScreen">>();
+  const route = useRoute<RouteProp<MainStackParamList, "CharacterScreen">>();
   const params: { character: Character } = route.params;
-  const { setBottomTabBarVisible } = useContext(BottomBarContext);
-
-  React.useEffect(() => {
-    setBottomTabBarVisible(false);
-    return () => {
-      setBottomTabBarVisible(true);
-    };
-  }, []);
 
   console.log(params.character);
   const handleStartChat = () => {
     navigation.navigate({
-      name: "NewChatScreen",
+      name: "ChatScreen",
       params: { character: params.character },
     } as never);
   };
   return (
-    <Box>
+    <SafeAreaView>
       <Pressable
         onPress={() => navigation.goBack()}
         position={"absolute"}
         zIndex={1}
-        top={4}
+        top={16}
         left={4}
       >
         <Box
@@ -50,14 +40,11 @@ const CharacterScreen = () => {
         </Box>
       </Pressable>
       <ScrollView>
-        <Image
+        <FastImage
           source={{
             uri: params.character.image,
           }}
-          alt="Alternate Text"
-          // size="xs"
-          width={"100%"}
-          height={"450px"}
+          style={{ height: 450, width: "100%" }}
         />
         <VStack pb={"100px"}>
           <VStack
@@ -105,7 +92,7 @@ const CharacterScreen = () => {
           </Text>
         </Box>
       </Pressable>
-    </Box>
+    </SafeAreaView>
   );
 };
 

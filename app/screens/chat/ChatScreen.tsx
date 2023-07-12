@@ -1,24 +1,21 @@
 import React, { useContext, useState } from "react";
-import ChatLayout from "../../components/chat/ChatLayout";
-import { Box, KeyboardAvoidingView, Text } from "native-base";
+import { Box } from "native-base";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
 import { Character } from "../../services/charactersService";
-import { ChatStackParamList } from "./ChatNavigation";
-import chatService, { Chat } from "../../services/chatService";
-import { Keyboard, Platform } from "react-native";
-import { useHeaderHeight } from "@react-navigation/elements";
-import { BottomBarContext, ChatContext } from "../../context/context";
-import LoadingWrapper from "../../components/common/LoadingWrapper";
+import { Chat } from "../../services/chatService";
+import { ChatContext } from "../../context/context";
 import * as Haptics from "expo-haptics";
+import ChatLayout2 from "../../components/chatv2/ChatLayout2";
+import { MainStackParamList } from "../../../App";
 
 const ChatScreen = () => {
   const navigation = useNavigation();
-  const route = useRoute<RouteProp<ChatStackParamList, "ChatScreen">>();
+  const route = useRoute<RouteProp<MainStackParamList, "ChatScreen">>();
   const params: { character: Character; chat?: Chat } = route.params;
-  const headerHeight = useHeaderHeight();
   const { newChat } = useContext(ChatContext);
   const [chat, setChat] = useState<Chat | undefined>(params.chat);
-  const { setBottomTabBarVisible } = useContext(BottomBarContext);
+
+  console.log("chatscreen");
 
   React.useEffect(() => {
     // console.log(route.params);
@@ -28,30 +25,33 @@ const ChatScreen = () => {
         ?.then((chat) => {
           setChat(chat);
         })
+        .catch((err) => {
+          console.log(err);
+          navigation.goBack();
+        })
         .finally(() => {
           Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
         });
     }
-    setBottomTabBarVisible(false);
-    return () => {
-      setBottomTabBarVisible(true);
-    };
   }, []);
 
   return (
-    <KeyboardAvoidingView
-      style={{ flex: 1 }}
-      behavior={Platform.OS === "ios" ? "padding" : undefined}
-      keyboardVerticalOffset={Platform.OS === "ios" ? headerHeight : 0}
-    >
-      {chat && (
-        <ChatLayout
-          chat={chat}
-          handleReturn={() => navigation.goBack()}
-          character={params.character}
-        />
-      )}
-    </KeyboardAvoidingView>
+    // <KeyboardAvoidingView
+    //   style={{ flex: 1 }}
+    //   behavior={Platform.OS === "ios" ? "padding" : undefined}
+    //   keyboardVerticalOffset={Platform.OS === "ios" ? headerHeight : 0}
+    // >
+    // {chat && (
+    // <ChatLayout
+    //   chat={chat}
+    //   handleReturn={() => navigation.goBack()}
+    //   character={params.character}
+    // />
+    <Box>
+      {chat && <ChatLayout2 chat={chat} character={params.character} />}
+    </Box>
+    // )}
+    // </KeyboardAvoidingView>
   );
 };
 

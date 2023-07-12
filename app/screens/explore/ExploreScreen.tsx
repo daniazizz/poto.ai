@@ -8,6 +8,8 @@ import {
   ScrollView,
   Image,
   useTheme,
+  Skeleton,
+  HStack,
 } from "native-base";
 import {} from "react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -19,17 +21,30 @@ import charactersService, {
 import CharacterAvatar from "../../components/common/CharacterAvatar";
 import { User } from "firebase/auth";
 import LoadingWrapper from "../../components/common/LoadingWrapper";
-import { BottomBarContext, SplashScreenContext } from "../../context/context";
+import {
+  BottomBarContext,
+  CharacterContext,
+  SplashScreenContext,
+} from "../../context/context";
 
 interface CharacterItemProps {
   char: Character;
-  onPress: () => void;
 }
 
-const CharacterItem = React.memo(({ char, onPress }: CharacterItemProps) => {
-  char.image && console.log(char.image);
+const CharacterItem = React.memo(({ char }: CharacterItemProps) => {
+  const navigation = useNavigation();
+
   return (
-    <Pressable onPress={onPress} alignItems={"center"}>
+    <Pressable
+      onPress={() => {
+        console.log(char);
+        navigation.navigate({
+          name: "CharacterScreen",
+          params: { character: char },
+        } as never);
+      }}
+      alignItems={"center"}
+    >
       <CharacterAvatar
         name={char.name}
         image={char.image}
@@ -53,11 +68,10 @@ const CharacterItem = React.memo(({ char, onPress }: CharacterItemProps) => {
 interface CharacterListProps {
   categoryName: string;
   data: Character[];
-  onPress: (char: Character) => void;
 }
 
 const CharacterList = React.memo(
-  ({ data, onPress, categoryName }: CharacterListProps) => {
+  ({ data, categoryName }: CharacterListProps) => {
     return (
       <VStack space="5" my={2} bgColor={"gray.800"} py={3}>
         <Text fontSize="xl" fontWeight={"semibold"} pl={3} color={"white"}>
@@ -72,9 +86,7 @@ const CharacterList = React.memo(
           initialNumToRender={4}
           windowSize={4}
           removeClippedSubviews={true}
-          renderItem={({ item }) => (
-            <CharacterItem char={item} onPress={() => onPress(item)} />
-          )}
+          renderItem={({ item }) => <CharacterItem char={item} />}
         />
       </VStack>
     );
@@ -84,24 +96,23 @@ const CharacterList = React.memo(
 interface CharacterListCategoryProps {
   allCategories: CategoryCharacters[];
   allCharacters: Character[];
-  onPress: (char: Character) => void;
-  onPressSearch: () => void;
 }
 
 const CharacterListCategory = React.memo(
-  ({
-    allCategories,
-    allCharacters,
-    onPress,
-    onPressSearch,
-  }: CharacterListCategoryProps) => {
+  ({ allCategories, allCharacters }: CharacterListCategoryProps) => {
+    const navigation = useNavigation();
     return (
       <FlatList
         pt={2}
         ListHeaderComponent={
           <SearchBar
             disabled={true}
-            onPress={onPressSearch}
+            onPress={() => {
+              navigation.navigate({
+                name: "ExploreSearchScreen",
+                params: { characters: allCharacters },
+              } as never);
+            }}
             onChangeText={() => {}}
             value=""
           />
@@ -116,7 +127,6 @@ const CharacterListCategory = React.memo(
         renderItem={({ item: cat, index: idx }) => (
           <CharacterList
             data={cat.characters}
-            onPress={onPress}
             categoryName={cat.category.name}
           />
         )}
@@ -125,57 +135,58 @@ const CharacterListCategory = React.memo(
   }
 );
 
-const ExploreScreen = () => {
-  const navigation = useNavigation();
-  const [allCategories, setAllCategories] = React.useState<
-    CategoryCharacters[]
-  >([]);
-  const [allCharacters, setAllCharacters] = React.useState<Character[]>([]);
-  const [loading, setLoading] = React.useState<boolean>(true);
-  const { setAppIsReady } = React.useContext(SplashScreenContext);
+const LoadingSkeleton = React.memo(() => {
+  return (
+    <FlatList
+      pt={2}
+      ListHeaderComponent={
+        <SearchBar disabled={true} onChangeText={() => {}} value="" />
+      }
+      ListHeaderComponentStyle={{ paddingBottom: 20 }}
+      initialNumToRender={3}
+      data={[1, 2, 3, 4, 5, 6, 7]}
+      keyExtractor={(item) => item.toString()}
+      renderItem={({ item: cat, index: idx }) => (
+        <VStack height={225} mb={5} bgColor={"gray.800"}>
+          <Skeleton.Text lines={1} w={250} p={5} />
+          <HStack alignItems={"center"}>
+            <FlatList
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              data={[1, 2, 3, 4, 5, 6]}
+              keyExtractor={(item) => item.toString()}
+              initialNumToRender={4}
+              windowSize={4}
+              removeClippedSubviews={true}
+              renderItem={({ item }) => (
+                <VStack alignItems={"center"} space={4} mx={2}>
+                  <Skeleton h={100} w={100} rounded={"full"} />
+                  <Skeleton.Text lines={2} w={75} alignItems={"center"} />
+                </VStack>
+              )}
+            />
+          </HStack>
+        </VStack>
+      )}
+    />
+  );
+});
 
-  React.useEffect(() => {
-    setLoading(true);
-    charactersService
-      .getCharactersByCategory()
-      .then(({ data }) => {
-        // console.log(data);
-        setAllCategories(data);
-        const characters = data
-          .map((category) => category.characters)
-          .flat()
-          .filter((character, index, array) => {
-            // Filter out characters with duplicate names
-            return array.findIndex((c) => c.name === character.name) === index;
-          });
-        setAllCharacters([...new Set(characters)]);
-        setAppIsReady(true);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => setLoading(false));
-  }, []);
+const ExploreScreen = () => {
+  const { allCategories, allCharacters } = React.useContext(CharacterContext);
+  const [loading, setLoading] = React.useState<boolean>(false);
 
   return (
     <LoadingWrapper loading={loading}>
       <VStack h={"full"} w={"full"}>
-        <CharacterListCategory
-          allCategories={allCategories}
-          allCharacters={allCharacters}
-          onPress={(char) => {
-            navigation.navigate({
-              name: "CharacterScreen",
-              params: { character: char },
-            } as never);
-          }}
-          onPressSearch={() => {
-            navigation.navigate({
-              name: "ExploreSearchScreen",
-              params: { characters: allCharacters },
-            } as never);
-          }}
-        />
+        {allCategories.length === 0 ? (
+          <LoadingSkeleton />
+        ) : (
+          <CharacterListCategory
+            allCategories={allCategories}
+            allCharacters={allCharacters}
+          />
+        )}
       </VStack>
     </LoadingWrapper>
   );

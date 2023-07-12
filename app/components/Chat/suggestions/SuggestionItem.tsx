@@ -9,7 +9,7 @@ interface Props {
 const SuggestionItem = (props: Props) => {
   return (
     <Pressable onPress={() => props.onPress(props.question)}>
-      <HStack bgColor={"gray.800"} rounded={"xl"} p={3} m={1}>
+      <HStack bgColor={"gray.800"} rounded={"xl"} p={3} m={1} mx={2}>
         <Text textAlign={"center"} color={"white"} fontSize={13} width={"full"}>
           {props.question}
         </Text>

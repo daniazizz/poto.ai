@@ -5,26 +5,35 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HeaderRight from "./app/components/common/header/HeaderRight";
 import HeaderTitle from "./app/components/common/header/HeaderTitle";
 import SettingsScreen from "./app/screens/settings/SettingsScreen";
-import ChatNavigation from "./app/screens/chat/ChatNavigation";
-import ExploreNavigation from "./app/screens/explore/ExploreNavigation";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import firebase from "./firebase";
 import { User } from "firebase/auth";
 import apiService from "./app/services/apiService";
-import { View } from "react-native";
+import { Platform, View } from "react-native";
 import Entypo from "@expo/vector-icons/Entypo";
 import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
-import { CategoryCharacters } from "./app/services/charactersService";
+import charactersService, {
+  CategoryCharacters,
+  Character,
+} from "./app/services/charactersService";
 import userService, { AppUser } from "./app/services/userService";
 import chatService, { Chat, ChatMessage } from "./app/services/chatService";
 import ShopScreen from "./app/screens/shop/ShopScreen";
 import {
   UserDataContext,
   ChatContext,
-  BottomBarContext,
+  CharacterContext,
 } from "./app/context/context";
+import ChatListScreen from "./app/screens/chat/ChatListScreen";
+import ExploreScreen from "./app/screens/explore/ExploreScreen";
+import ChatScreen from "./app/screens/chat/ChatScreen";
+import ExploreSearchScreen from "./app/screens/explore/ExploreSearchScreen";
+import CharacterScreen from "./app/screens/explore/CharacterScreen";
+import Purchases from "react-native-purchases";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import ContactScreen from "./app/screens/shop/ContactScreen";
 
 const nativeBaseTheme = extendTheme({
   colors: {
@@ -67,74 +76,66 @@ const Tab = createBottomTabNavigator();
 const TabNavigation = () => {
   const [bottomTabBarVisible, setBottomTabBarVisible] = useState(true);
   return (
-    <BottomBarContext.Provider
-      value={{ bottomTabBarVisible, setBottomTabBarVisible }}
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        // ICONS
+        tabBarIcon: ({ focused, color, size }) => {
+          if (route.name === "Chat") {
+            return focused ? (
+              <Ionicons name={"ios-chatbubbles"} size={size} color={color} />
+            ) : (
+              <Ionicons
+                name={"ios-chatbubbles-outline"}
+                size={size}
+                color={color}
+              />
+            );
+          } else if (route.name === "Explore") {
+            return focused ? (
+              <Ionicons name={"ios-people"} size={size} color={color} />
+            ) : (
+              <Ionicons name={"ios-people-outline"} size={size} color={color} />
+            );
+          }
+        },
+        tabBarActiveTintColor: "white",
+        tabBarInactiveTintColor: "gray",
+
+        headerTitleAlign: "left",
+        headerStyle: {
+          height: 110,
+          shadowColor: "transparent",
+        },
+        headerRight: () => <HeaderRight />,
+        tabBarStyle: {
+          borderTopWidth: 0,
+          marginTop: 10,
+          display: bottomTabBarVisible ? "flex" : "none",
+        },
+      })}
+      initialRouteName="Explore"
     >
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          // ICONS
-          tabBarIcon: ({ focused, color, size }) => {
-            if (route.name === "Chat") {
-              return focused ? (
-                <Ionicons name={"ios-chatbubbles"} size={size} color={color} />
-              ) : (
-                <Ionicons
-                  name={"ios-chatbubbles-outline"}
-                  size={size}
-                  color={color}
-                />
-              );
-            } else if (route.name === "Explore") {
-              return focused ? (
-                <Ionicons name={"ios-people"} size={size} color={color} />
-              ) : (
-                <Ionicons
-                  name={"ios-people-outline"}
-                  size={size}
-                  color={color}
-                />
-              );
-            }
-          },
-          tabBarActiveTintColor: "white",
-          tabBarInactiveTintColor: "gray",
+      {/* TABS */}
 
-          headerTitleAlign: "left",
-          headerStyle: {
-            height: 110,
-            shadowColor: "transparent",
-          },
-          headerRight: () => <HeaderRight />,
-          tabBarStyle: {
-            borderTopWidth: 0,
-            marginTop: 10,
-            display: bottomTabBarVisible ? "flex" : "none",
-          },
-        })}
-        initialRouteName="Explore"
-      >
-        {/* TABS */}
+      {/* CHAT TAB */}
+      <Tab.Screen
+        name="Chat"
+        options={{
+          headerTitle: () => <HeaderTitle title="Chats" />,
+        }}
+        component={ChatListScreen}
+      />
 
-        {/* CHAT TAB */}
-        <Tab.Screen
-          name="Chat"
-          options={{
-            headerTitle: () => <HeaderTitle title="Chats" />,
-          }}
-          component={ChatNavigation}
-        />
-
-        {/* EXPLORE TAB */}
-        <Tab.Screen
-          name="Explore"
-          options={{
-            headerTitle: () => <HeaderTitle title="Explore" />,
-            // lazy: false,
-          }}
-          component={ExploreNavigation}
-        />
-      </Tab.Navigator>
-    </BottomBarContext.Provider>
+      {/* EXPLORE TAB */}
+      <Tab.Screen
+        name="Explore"
+        options={{
+          headerTitle: () => <HeaderTitle title="Explore" />,
+          // lazy: false,
+        }}
+        component={ExploreScreen}
+      />
+    </Tab.Navigator>
   );
 };
 
@@ -143,15 +144,18 @@ const TabNavigation = () => {
 
 const Stack = createNativeStackNavigator();
 
-interface MainStackNavigationProps {
-  user: User;
-}
+export type MainStackParamList = {
+  ChatListScreen: undefined;
+  ChatScreen: { character: Character; chat?: Chat };
+  ExploreSearchScreen: { characters: Character[] };
+  CharacterScreen: { character: Character };
+};
 
-const MainStackNavigation = (props: MainStackNavigationProps) => {
+const MainStackNavigation = () => {
   return (
     <Stack.Navigator
       initialRouteName="Main"
-      screenOptions={{ headerShown: true }}
+      screenOptions={{ headerShown: false }}
     >
       <Stack.Screen
         name="Main"
@@ -163,6 +167,14 @@ const MainStackNavigation = (props: MainStackNavigationProps) => {
       />
       <Stack.Screen name="Settings" component={SettingsScreen} />
       <Stack.Screen name="Shop" component={ShopScreen} />
+      <Stack.Screen name="Contact" component={ContactScreen} />
+      <Stack.Screen name="ChatScreen" component={ChatScreen} />
+      <Stack.Screen
+        name="ExploreSearchScreen"
+        options={{ animation: "fade", headerShown: false }}
+        component={ExploreSearchScreen}
+      />
+      <Stack.Screen name="CharacterScreen" component={CharacterScreen} />
     </Stack.Navigator>
   );
 };
@@ -179,6 +191,8 @@ export default function App() {
   const [maxChats, setMaxChats] = useState<number>(0);
   const [appIsReady, setAppIsReady] = useState(false);
   const [appIsLoaded, setAppIsLoaded] = useState(false);
+  const [allCategories, setAllCategories] = useState<CategoryCharacters[]>([]);
+  const [allCharacters, setAllCharacters] = useState<Character[]>([]);
 
   // SPLASH SCREEN UNTIL APP IS READY
   // USER LOGIN
@@ -188,27 +202,33 @@ export default function App() {
         // Pre-load fonts, make any API calls you need to do here
         await Font.loadAsync(Entypo.font);
 
+        // Sign in user
         await firebase.auth
           .signInAnonymously(firebase.auth.getAuth())
-          .then(({ user }) => {
+          .then(async ({ user }) => {
             if (user) {
-              user.getIdToken().then((idToken) => {
-                apiService.setBearerToken(idToken);
-                setUser(user);
-                // Get the user's chats
-                chatService.getChats().then(({ data }) => {
-                  setChats(data);
-                  // console.log(data);
+              await user
+                .getIdToken()
+                .then(async (idToken) => {
+                  apiService.setBearerToken(idToken);
+                  setUser(user);
+
+                  await Promise.all([
+                    userService.getUser().then(({ data }) => {
+                      setCredits(data.user_data.credits);
+                      setSubscription(data.user_data.subscription);
+                      setMaxChats(data.user_data.max_chats);
+                      setAppUser(data);
+                    }),
+                    chatService.getChats().then(({ data }) => {
+                      console.log(data.length);
+                      setChats(data);
+                    }),
+                  ]);
+                })
+                .finally(() => {
+                  setAppIsLoaded(true);
                 });
-                // Get the user's data
-                userService.getUser().then(({ data }) => {
-                  console.log(data);
-                  setCredits(data.user_data.credits);
-                  setSubscription(data.user_data.subscription);
-                  setMaxChats(data.user_data.max_chats);
-                  setAppUser(data);
-                });
-              });
             } else {
               apiService.setBearerToken("undefined");
               setUser(undefined);
@@ -218,7 +238,6 @@ export default function App() {
         console.warn(e);
       } finally {
         // Tell the application to render
-        setAppIsLoaded(true);
       }
     }
 
@@ -226,8 +245,67 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    true && appIsLoaded && SplashScreen.hideAsync();
+    appIsLoaded && SplashScreen.hideAsync();
   }, [appIsLoaded]);
+
+  // IN APP PURCHASES
+  useEffect(() => {
+    if (user) {
+      console.log(user.uid);
+      Purchases.setLogLevel(Purchases.LOG_LEVEL.DEBUG);
+
+      if (Platform.OS === "ios") {
+        Purchases.configure({
+          apiKey: "appl_PORutsiLWByHNYbeTWCcivuruhl",
+          appUserID: user.uid,
+        });
+      } else if (Platform.OS === "android") {
+        Purchases.configure({
+          apiKey: "<public_google_api_key>",
+          appUserID: user.uid,
+        });
+      }
+    }
+  }, [user]);
+
+  // GET ALL CHARACTERS
+  useEffect(() => {
+    if (user) {
+      charactersService
+        .getCharactersByCategory()
+        .then(({ data }) => {
+          setAllCategories(data);
+          const characters = data
+            .map((category) => category.characters)
+            .flat()
+            .filter((character, index, array) => {
+              // Filter out characters with duplicate names
+              return (
+                array.findIndex((c) => c.name === character.name) === index
+              );
+            });
+          setAllCharacters([...new Set(characters)]);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [user]);
+
+  // SET DEFAULT VALUES FOR REVIEW
+  useEffect(() => {
+    // AsyncStorage.clear();
+    AsyncStorage.getItem("reviewed").then((value) => {
+      if (value === null) {
+        AsyncStorage.setItem("reviewed", "false");
+      }
+    });
+    AsyncStorage.getItem("actionsUntilReview").then((value) => {
+      if (value === null) {
+        AsyncStorage.setItem("actionsUntilReview", "7");
+      }
+    });
+  }, []);
 
   const newChat = async (characterId: string) => {
     const { data } = await chatService.newChat(characterId);
@@ -247,25 +325,31 @@ export default function App() {
           return chat;
         }
       });
+      // Make sure that the chat is at the top of the list
+      // const chatIndex = newChats.findIndex((chat) => chat.id === chatId);
+      // const chat = newChats.splice(chatIndex, 1)[0];
+      // return [chat, ...newChats];
       return newChats;
     });
   };
 
   return (
     <NativeBaseProvider theme={nativeBaseTheme}>
-      <UserDataContext.Provider
-        value={{ appUser, credits, setCredits, subscription, maxChats }}
-      >
-        <ChatContext.Provider value={{ chats, newChat, addMessage }}>
-          {/* <SplashScreenContext.Provider value={{ setAppIsReady }}> */}
-          <View style={{ flex: 1 }}>
-            <NavigationContainer theme={navigatorTheme}>
-              {user && <MainStackNavigation user={user} />}
-            </NavigationContainer>
-          </View>
-          {/* </SplashScreenContext.Provider> */}
-        </ChatContext.Provider>
-      </UserDataContext.Provider>
+      <ChatContext.Provider value={{ chats, newChat, addMessage }}>
+        <CharacterContext.Provider value={{ allCategories, allCharacters }}>
+          <UserDataContext.Provider
+            value={{ appUser, credits, setCredits, subscription, maxChats }}
+          >
+            {/* <SplashScreenContext.Provider value={{ setAppIsReady }}> */}
+            <View style={{ flex: 1 }}>
+              <NavigationContainer theme={navigatorTheme}>
+                <MainStackNavigation />
+              </NavigationContainer>
+            </View>
+            {/* </SplashScreenContext.Provider> */}
+          </UserDataContext.Provider>
+        </CharacterContext.Provider>
+      </ChatContext.Provider>
     </NativeBaseProvider>
   );
 }

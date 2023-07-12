@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Box,
   FlatList,
   HStack,
@@ -14,15 +13,15 @@ import SearchBar from "../../components/Explore/SearchBar";
 
 import { useNavigation } from "@react-navigation/native";
 import { Character } from "../../services/charactersService";
-import { ExploreStackParamList } from "./ExploreNavigation";
 import { RouteProp, useRoute } from "@react-navigation/native";
 import debounce from "lodash.debounce";
 import CharacterAvatar from "../../components/common/CharacterAvatar";
-import { User } from "firebase/auth";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { MainStackParamList } from "../../../App";
 
 const ExploreSearchScreen = () => {
   const route =
-    useRoute<RouteProp<ExploreStackParamList, "ExploreSearchScreen">>();
+    useRoute<RouteProp<MainStackParamList, "ExploreSearchScreen">>();
   const routeProps = route.params;
   const [search, setSearch] = React.useState("");
   const [filteredCharacters, setFilteredCharacters] = React.useState<
@@ -53,80 +52,76 @@ const ExploreSearchScreen = () => {
 
   const navigation = useNavigation();
   return (
-    <KeyboardAvoidingView behavior={"padding"} flex={1}>
-      <VStack
-        space="5"
-        height={"100%"}
-        pb={100}
-        w={"100%"}
-        alignItems={"center"}
-      >
-        <HStack py={1} alignItems={"center"}>
-          <Pressable
-            onPress={() => {
-              navigation.goBack();
-            }}
-            p={3}
-          >
-            <ChevronLeftIcon size="lg" />
-          </Pressable>
-
-          <Box flex={1}>
-            <SearchBar
-              disabled={false}
-              autoFocus={true}
-              value={search}
-              onChangeText={handleSearch}
-            />
-          </Box>
-        </HStack>
-        <FlatList
-          w={"100%"}
-          // flexGrow={1}
-          keyboardShouldPersistTaps={"handled"}
-          // initialNumToRender={5}
-          getItemLayout={(data, index) => ({
-            length: 100,
-            offset: 100 * index,
-            index,
-          })}
-          keyExtractor={(item, index) => index.toString()}
-          data={filteredCharacters.slice(0, 5)}
-          renderItem={({ item: char }) => (
+    <SafeAreaView style={{ backgroundColor: "black", flex: 1 }}>
+      <KeyboardAvoidingView behavior={"padding"} flex={1}>
+        <VStack space="5" height={"100%"} w={"100%"} alignItems={"center"}>
+          <HStack py={1} alignItems={"center"}>
             <Pressable
-              onPress={() =>
-                navigation.navigate({
-                  name: "CharacterScreen",
-                  params: { character: char },
-                } as never)
-              }
+              onPress={() => {
+                navigation.goBack();
+              }}
+              p={3}
             >
-              <HStack space={3} mb={6} px={4} alignItems={"center"}>
-                <CharacterAvatar
-                  size={"lg"}
-                  name={char.name}
-                  image={char.image}
-                />
-
-                <VStack>
-                  <Text color={"white"} fontWeight={"bold"}>
-                    {char.name}
-                  </Text>
-                  <Text
-                    color={"white"}
-                    fontSize={"xs"}
-                    maxWidth={"90%"}
-                    numberOfLines={2}
-                  >
-                    {char.short_description}
-                  </Text>
-                </VStack>
-              </HStack>
+              <ChevronLeftIcon size="lg" />
             </Pressable>
-          )}
-        />
-      </VStack>
-    </KeyboardAvoidingView>
+
+            <Box flex={1}>
+              <SearchBar
+                disabled={false}
+                autoFocus={true}
+                value={search}
+                onChangeText={handleSearch}
+              />
+            </Box>
+          </HStack>
+          <FlatList
+            w={"100%"}
+            // flexGrow={1}
+            keyboardShouldPersistTaps={"handled"}
+            // initialNumToRender={5}
+            getItemLayout={(data, index) => ({
+              length: 100,
+              offset: 100 * index,
+              index,
+            })}
+            keyExtractor={(item, index) => index.toString()}
+            data={filteredCharacters.slice(0, 5)}
+            renderItem={({ item: char }) => (
+              <Pressable
+                onPress={() =>
+                  navigation.navigate({
+                    name: "CharacterScreen",
+                    params: { character: char },
+                  } as never)
+                }
+              >
+                <HStack space={3} mb={6} px={4} alignItems={"center"}>
+                  <CharacterAvatar
+                    size={"lg"}
+                    name={char.name}
+                    image={char.image}
+                  />
+
+                  <VStack>
+                    <Text color={"white"} fontWeight={"bold"}>
+                      {char.name}
+                    </Text>
+                    <Text
+                      color={"white"}
+                      fontSize={"xs"}
+                      maxWidth={"90%"}
+                      numberOfLines={2}
+                    >
+                      {char.short_description}
+                    </Text>
+                  </VStack>
+                </HStack>
+              </Pressable>
+            )}
+          />
+        </VStack>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 

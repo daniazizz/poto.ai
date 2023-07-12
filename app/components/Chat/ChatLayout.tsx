@@ -95,7 +95,7 @@ const ChatLayout = (props: Props) => {
     oldConvItems.push({ sender: "user", content: text, loading: false });
 
     setConvItems(oldConvItems);
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    // Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
 
     addMessage(props.chat.id, { sender: "user", content: text });
 
@@ -110,13 +110,13 @@ const ChatLayout = (props: Props) => {
           ...prev,
           { sender: "character", content: "", loading: true },
         ]);
-        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+        // Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
       }
     }, 1000);
 
     props.chat &&
       charactersService
-        .askQuestion(props.character.id, text, props.chat.id)
+        .askQuestion(props.character.name, text, props.chat.id)
         .then(({ data }) => {
           setConvItems([
             ...oldConvItems,
@@ -132,7 +132,7 @@ const ChatLayout = (props: Props) => {
           setCredits(credits - 1);
 
           setLoading(false);
-          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+          // Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
           scrollToEnd();
         })
         .catch((err) => {
