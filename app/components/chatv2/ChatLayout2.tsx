@@ -77,7 +77,7 @@ const CustomComposer = React.memo((props: CustomComposerProps) => {
         }}
         multiline
         keyboardAppearance="dark"
-        maxLength={500}
+        maxLength={250}
         placeholder={"Type a message..."}
         placeholderTextColor={"#a1a1aa"}
         value={props.text}
