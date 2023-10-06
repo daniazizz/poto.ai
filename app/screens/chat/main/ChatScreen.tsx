@@ -5,7 +5,7 @@ import { Character } from "@services/charactersService";
 import { Chat } from "@services/chatService";
 import { ChatContext } from "@contexts/context";
 import * as Haptics from "expo-haptics";
-import ChatLayout2 from "./components/ChatLayout2";
+import ChatLayout2 from "./components/ChatLayout";
 import { MainStackParamList } from "@root/App";
 
 const ChatScreen = () => {

@@ -10,19 +10,20 @@ import {
   InputToolbar,
   Send,
 } from "react-native-gifted-chat";
-import { Ionicons } from "@expo/vector-icons";
-import charactersService, { Character } from "@services/charactersService";
-import { Chat } from "@services/chatService";
-import ChatHeader from "./ChatHeader";
-import { useNavigation } from "@react-navigation/native";
-import { ChatContext, UserDataContext } from "@contexts/context";
-import * as Haptics from "expo-haptics";
-import { MaterialIcons } from "@expo/vector-icons";
-import SuggestionList from "./suggestions/SuggestionList";
-import CharacterAvatar from "@components/common/CharacterAvatar";
 import { TypingAnimation } from "react-native-typing-animation";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as StoreReview from "expo-store-review";
+import { useNavigation } from "@react-navigation/native";
+import { Ionicons } from "@expo/vector-icons";
+import * as Haptics from "expo-haptics";
+import { MaterialIcons } from "@expo/vector-icons";
+
+import charactersService, { Character } from "@services/charactersService";
+import { Chat } from "@services/chatService";
+import ChatHeader from "./ChatHeader";
+import { ChatContext, UserDataContext } from "@contexts/context";
+import SuggestionList from "./suggestions/SuggestionList";
+import CharacterAvatar from "@components/common/CharacterAvatar";
 
 const CustomBubble = React.memo((props: BubbleProps<IMessage>) => {
   const theme = useTheme();
@@ -48,7 +49,6 @@ interface CustomComposerProps extends ComposerProps {
 }
 
 const CustomComposer = React.memo((props: CustomComposerProps) => {
-  // const [height, setHeight] = useState(props.composerHeight);
   return (
     <Box
       backgroundColor={"gray.700"}
@@ -56,7 +56,6 @@ const CustomComposer = React.memo((props: CustomComposerProps) => {
       flex={1}
       height={"full"}
       width={"full"}
-      // pt={3}
       padding={2}
       pl={4}
       flexDirection={"row"}
@@ -66,7 +65,6 @@ const CustomComposer = React.memo((props: CustomComposerProps) => {
         style={{
           height: "100%",
           width: "90%",
-          // flexGrow: 1,
           color: "white",
           fontSize: 15,
           maxHeight: 215,
@@ -80,7 +78,6 @@ const CustomComposer = React.memo((props: CustomComposerProps) => {
         placeholder={"Type a message..."}
         placeholderTextColor={"#a1a1aa"}
         value={props.text}
-        // onChangeText={(text) => setText(text)}
         onChangeText={props.onTextChanged}
         onContentSizeChange={(event) =>
           props.onInputSizeChanged &&
