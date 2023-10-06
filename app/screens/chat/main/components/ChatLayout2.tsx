@@ -11,19 +11,18 @@ import {
   Send,
 } from "react-native-gifted-chat";
 import { Ionicons } from "@expo/vector-icons";
-import charactersService, { Character } from "../../services/charactersService";
-import { Chat } from "../../services/chatService";
-import ChatHeader from "../chat/ChatHeader";
+import charactersService, { Character } from "@services/charactersService";
+import { Chat } from "@services/chatService";
+import ChatHeader from "./ChatHeader";
 import { useNavigation } from "@react-navigation/native";
-import { ChatContext, UserDataContext } from "../../context/context";
+import { ChatContext, UserDataContext } from "@contexts/context";
 import * as Haptics from "expo-haptics";
 import { MaterialIcons } from "@expo/vector-icons";
-import SuggestionList from "../chat/suggestions/SuggestionList";
-import CharacterAvatar from "../common/CharacterAvatar";
+import SuggestionList from "./suggestions/SuggestionList";
+import CharacterAvatar from "@components/common/CharacterAvatar";
 import { TypingAnimation } from "react-native-typing-animation";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as StoreReview from "expo-store-review";
-import debounce from "lodash.debounce";
 
 const CustomBubble = React.memo((props: BubbleProps<IMessage>) => {
   const theme = useTheme();

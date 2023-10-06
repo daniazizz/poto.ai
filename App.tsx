@@ -24,11 +24,11 @@ import {
   UserDataContext,
   ChatContext,
   CharacterContext,
-} from "./app/context/context";
+} from "./app/contexts/context";
 import ChatListScreen from "./app/screens/chat/chatList/ChatListScreen";
 import ExploreScreen from "./app/screens/explore/main/ExploreScreen";
 import ChatScreen from "./app/screens/chat/main/ChatScreen";
-import ExploreSearchScreen from "./app/screens/explore/ExploreSearchScreen";
+import ExploreSearchScreen from "./app/screens/explore/exploreSearch/ExploreSearchScreen";
 import CharacterScreen from "./app/screens/explore/characterDetail/CharacterScreen";
 import Purchases from "react-native-purchases";
 import AsyncStorage from "@react-native-async-storage/async-storage";

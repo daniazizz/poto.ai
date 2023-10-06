@@ -1,17 +1,14 @@
 import React, { useContext, useEffect } from "react";
 import { Box, HStack, ScrollView, Skeleton, Text, VStack } from "native-base";
-import * as RNIap from "react-native-iap";
-import { Platform, Pressable } from "react-native";
+import { Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
-import SafeArea from "react-native-safe-area";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { MaterialIcons } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
 import { packs } from "./packs.json";
-import { UserDataContext } from "../../context/context";
+import { UserDataContext } from "@contexts/context";
 import Purchases, { PurchasesStoreProduct } from "react-native-purchases";
-import { space } from "native-base/lib/typescript/theme/styled-system";
 
 interface PackageProps {
   name: string;

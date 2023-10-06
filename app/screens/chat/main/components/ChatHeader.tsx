@@ -1,18 +1,7 @@
-import {
-  HStack,
-  Center,
-  Text,
-  VStack,
-  Box,
-  ChevronLeftIcon,
-  Avatar,
-  Image,
-  Pressable,
-} from "native-base";
+import { HStack, Text, VStack, ChevronLeftIcon, Pressable } from "native-base";
 import React from "react";
-import { MaterialIcons } from "@expo/vector-icons";
-import { Character } from "../../services/charactersService";
-import CharacterAvatar from "../common/CharacterAvatar";
+import { Character } from "@services/charactersService";
+import CharacterAvatar from "@components/common/CharacterAvatar";
 
 interface Props {
   handleReturn: () => void;

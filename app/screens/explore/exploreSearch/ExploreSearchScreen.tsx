@@ -9,15 +9,15 @@ import {
   KeyboardAvoidingView,
 } from "native-base";
 import React from "react";
-import SearchBar from "../../components/Explore/SearchBar";
+import SearchBar from "./components/SearchBar";
 
 import { useNavigation } from "@react-navigation/native";
-import { Character } from "../../services/charactersService";
+import { Character } from "@services/charactersService";
 import { RouteProp, useRoute } from "@react-navigation/native";
 import debounce from "lodash.debounce";
-import CharacterAvatar from "../../components/common/CharacterAvatar";
+import CharacterAvatar from "@components/common/CharacterAvatar";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { MainStackParamList } from "../../../App";
+import { MainStackParamList } from "@root/App";
 
 const ExploreSearchScreen = () => {
   const route =

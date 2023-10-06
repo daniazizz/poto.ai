@@ -1,7 +1,16 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["./app/components/*"],
+      "@screens/*": ["./app/screens/*"],
+      "@contexts/*": ["./app/contexts/*"],
+      "@services/*": ["./app/services/*"],
+      "@app/*": ["./app/*"],
+      "@root/*": ["./*"]
+    }
   },
   "include": ["app"],
   "exclude": ["node_modules"]

@@ -1,31 +1,18 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
-  Box,
   Text,
   Pressable,
   VStack,
   FlatList,
-  ScrollView,
-  Image,
-  useTheme,
   Skeleton,
   HStack,
 } from "native-base";
-import {} from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import SearchBar from "../../../components/Explore/SearchBar";
-import charactersService, {
-  CategoryCharacters,
-  Character,
-} from "../../../services/charactersService";
-import CharacterAvatar from "../../../components/common/CharacterAvatar";
-import { User } from "firebase/auth";
-import LoadingWrapper from "../../../components/common/LoadingWrapper";
-import {
-  BottomBarContext,
-  CharacterContext,
-  SplashScreenContext,
-} from "../../../context/context";
+import SearchBar from "../exploreSearch/components/SearchBar";
+import { CategoryCharacters, Character } from "@services/charactersService";
+import CharacterAvatar from "@components/common/CharacterAvatar";
+import LoadingWrapper from "@components/common/LoadingWrapper";
+import { CharacterContext } from "@contexts/context";
 
 interface CharacterItemProps {
   char: Character;

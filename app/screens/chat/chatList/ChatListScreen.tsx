@@ -1,20 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
-import {
-  Box,
-  Text,
-  Pressable,
-  VStack,
-  Avatar,
-  FlatList,
-  HStack,
-} from "native-base";
+import React, { useContext, useState } from "react";
+import { Text, Pressable, VStack, FlatList, HStack } from "native-base";
 import { useNavigation } from "@react-navigation/native";
-import SearchBar from "../../components/Explore/SearchBar";
-import { User } from "firebase/auth";
-import chatService, { Chat } from "../../../services/chatService";
-import { RefreshControl } from "react-native";
-import { ChatContext } from "../../../context/context";
-import CharacterAvatar from "../../../components/common/CharacterAvatar";
+import { Chat } from "@services/chatService";
+import { ChatContext } from "@contexts/context";
+import CharacterAvatar from "@components/common/CharacterAvatar";
 
 const ChatListItem = React.memo(({ chat: item }: { chat: Chat }) => {
   const navigation = useNavigation();

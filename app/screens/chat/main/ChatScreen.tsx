@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
 import { Box } from "native-base";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
-import { Character } from "../../../services/charactersService";
-import { Chat } from "../../../services/chatService";
-import { ChatContext } from "../../../context/context";
+import { Character } from "@services/charactersService";
+import { Chat } from "@services/chatService";
+import { ChatContext } from "@contexts/context";
 import * as Haptics from "expo-haptics";
-import ChatLayout2 from "../../../components/chatv2/ChatLayout2";
-import { MainStackParamList } from "../../../../App";
+import ChatLayout2 from "./components/ChatLayout2";
+import { MainStackParamList } from "@root/App";
 
 const ChatScreen = () => {
   const navigation = useNavigation();

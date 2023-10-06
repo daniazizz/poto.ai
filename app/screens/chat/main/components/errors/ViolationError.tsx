@@ -1,5 +1,5 @@
 import React from "react";
-import Error from "../errors/Error";
+import Error from "./Error";
 
 const ViolationError = () => {
   return (

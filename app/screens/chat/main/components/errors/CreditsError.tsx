@@ -1,6 +1,5 @@
-import { VStack, Text, HStack } from "native-base";
+import { VStack, Text } from "native-base";
 import React from "react";
-import { Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 const CreditsError = () => {

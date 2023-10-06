@@ -5,7 +5,6 @@ import {
   Text,
   Pressable,
   Input,
-  Button,
   FormControl,
   TextArea,
   KeyboardAvoidingView,
@@ -15,7 +14,7 @@ import React, { useState } from "react";
 import { SafeAreaView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import storeService, { Issue } from "../../services/storeService";
+import storeService, { Issue } from "@services/storeService";
 
 const isValidEmail = (email: string) => {
   // Basic email validation, you can use a more comprehensive regex or library
