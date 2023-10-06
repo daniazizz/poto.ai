@@ -2,37 +2,37 @@ import { NativeBaseProvider, extendTheme } from "native-base";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import HeaderRight from "./app/components/header/HeaderRight";
-import HeaderTitle from "./app/components/header/HeaderTitle";
+import HeaderRight from "@components/header/HeaderRight";
+import HeaderTitle from "@components/header/HeaderTitle";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useEffect, useState } from "react";
 import firebase from "./firebase";
 import { User } from "firebase/auth";
-import apiService from "./app/services/apiService";
+import apiService from "@services/apiService";
 import { Platform, View } from "react-native";
 import Entypo from "@expo/vector-icons/Entypo";
 import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
-import charactersService, {
-  CategoryCharacters,
-  Character,
-} from "./app/services/charactersService";
-import userService, { AppUser } from "./app/services/userService";
-import chatService, { Chat, ChatMessage } from "./app/services/chatService";
-import ShopScreen from "./app/screens/shop/ShopScreen";
+import charactersService from "@services/charactersService";
+import { CategoryCharacters, Character } from "@~types/characterTypes";
+import userService from "@services/userService";
+import { AppUser } from "@~types/userTypes";
+import chatService from "@services/chatService";
+import { Chat, ChatMessage } from "@~types/chatTypes";
+import ShopScreen from "@screens/shop/ShopScreen";
 import {
   UserDataContext,
   ChatContext,
   CharacterContext,
-} from "./app/contexts/context";
-import ChatListScreen from "./app/screens/chat/chatList/ChatListScreen";
-import ExploreScreen from "./app/screens/explore/main/ExploreScreen";
-import ChatScreen from "./app/screens/chat/main/ChatScreen";
-import ExploreSearchScreen from "./app/screens/explore/exploreSearch/ExploreSearchScreen";
-import CharacterScreen from "./app/screens/explore/characterDetail/CharacterScreen";
+} from "@contexts/context";
+import ChatListScreen from "@screens/chat/chatList/ChatListScreen";
+import ExploreScreen from "@screens/explore/main/ExploreScreen";
+import ChatScreen from "@screens/chat/main/ChatScreen";
+import ExploreSearchScreen from "@screens/explore/exploreSearch/ExploreSearchScreen";
+import CharacterScreen from "@screens/explore/characterDetail/CharacterScreen";
 import Purchases from "react-native-purchases";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import ContactScreen from "./app/screens/shop/ContactScreen";
+import ContactScreen from "@screens/shop/ContactScreen";
 
 const nativeBaseTheme = extendTheme({
   colors: {

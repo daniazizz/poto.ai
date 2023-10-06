@@ -20,6 +20,7 @@ const CharacterScreen = () => {
       params: { character: params.character },
     } as never);
   };
+
   return (
     <SafeAreaView>
       <Pressable
