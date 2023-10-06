@@ -2,11 +2,11 @@ import React from "react";
 import { VStack, Box, Pressable, Text, ScrollView } from "native-base";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { RouteProp } from "@react-navigation/native";
-import { Character } from "../../services/charactersService";
+import { Character } from "../../../services/charactersService";
 import { Ionicons } from "@expo/vector-icons";
 import FastImage from "react-native-fast-image";
 import { SafeAreaView } from "react-native";
-import { MainStackParamList } from "../../../App";
+import { MainStackParamList } from "../../../../App";
 
 const CharacterScreen = () => {
   const navigation = useNavigation();

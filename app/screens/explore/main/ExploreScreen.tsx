@@ -13,19 +13,19 @@ import {
 } from "native-base";
 import {} from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import SearchBar from "../../components/Explore/SearchBar";
+import SearchBar from "../../../components/Explore/SearchBar";
 import charactersService, {
   CategoryCharacters,
   Character,
-} from "../../services/charactersService";
-import CharacterAvatar from "../../components/common/CharacterAvatar";
+} from "../../../services/charactersService";
+import CharacterAvatar from "../../../components/common/CharacterAvatar";
 import { User } from "firebase/auth";
-import LoadingWrapper from "../../components/common/LoadingWrapper";
+import LoadingWrapper from "../../../components/common/LoadingWrapper";
 import {
   BottomBarContext,
   CharacterContext,
   SplashScreenContext,
-} from "../../context/context";
+} from "../../../context/context";
 
 interface CharacterItemProps {
   char: Character;

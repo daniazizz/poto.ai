@@ -2,7 +2,7 @@ import { HStack, Text, Box, Pressable, useTheme } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 import React, { useContext } from "react";
 import { useNavigation } from "@react-navigation/core";
-import { UserDataContext } from "../../../context/context";
+import { UserDataContext } from "../../context/context";
 
 const HeaderRight = () => {
   const navigation = useNavigation();

@@ -2,9 +2,8 @@ import { NativeBaseProvider, extendTheme } from "native-base";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import HeaderRight from "./app/components/common/header/HeaderRight";
-import HeaderTitle from "./app/components/common/header/HeaderTitle";
-import SettingsScreen from "./app/screens/settings/SettingsScreen";
+import HeaderRight from "./app/components/header/HeaderRight";
+import HeaderTitle from "./app/components/header/HeaderTitle";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useEffect, useState } from "react";
 import firebase from "./firebase";
@@ -26,11 +25,11 @@ import {
   ChatContext,
   CharacterContext,
 } from "./app/context/context";
-import ChatListScreen from "./app/screens/chat/ChatListScreen";
-import ExploreScreen from "./app/screens/explore/ExploreScreen";
-import ChatScreen from "./app/screens/chat/ChatScreen";
+import ChatListScreen from "./app/screens/chat/chatList/ChatListScreen";
+import ExploreScreen from "./app/screens/explore/main/ExploreScreen";
+import ChatScreen from "./app/screens/chat/main/ChatScreen";
 import ExploreSearchScreen from "./app/screens/explore/ExploreSearchScreen";
-import CharacterScreen from "./app/screens/explore/CharacterScreen";
+import CharacterScreen from "./app/screens/explore/characterDetail/CharacterScreen";
 import Purchases from "react-native-purchases";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ContactScreen from "./app/screens/shop/ContactScreen";
@@ -165,7 +164,6 @@ const MainStackNavigation = () => {
         }}
         component={TabNavigation}
       />
-      <Stack.Screen name="Settings" component={SettingsScreen} />
       <Stack.Screen name="Shop" component={ShopScreen} />
       <Stack.Screen name="Contact" component={ContactScreen} />
       <Stack.Screen name="ChatScreen" component={ChatScreen} />
