@@ -11,6 +11,7 @@ module.exports = function (api) {
             "@components": "./app/components",
             "@screens": "./app/screens",
             "@contexts": "./app/contexts",
+            "@constants": "./app/constants",
             "@services": "./app/services",
             "@~types": "./app/types",
             "@app": "./app",

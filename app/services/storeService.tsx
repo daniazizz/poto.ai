@@ -1,5 +1,5 @@
 import api from "./apiService";
-import { packs } from "../screens/shop/packs.json";
+import { packs } from "@constants/packs.json";
 import { UserData } from "@app/types/userTypes";
 
 const endpoint = "/process_purchase";

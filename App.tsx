@@ -19,7 +19,7 @@ import userService from "@services/userService";
 import { AppUser } from "@~types/userTypes";
 import chatService from "@services/chatService";
 import { Chat, ChatMessage } from "@~types/chatTypes";
-import ShopScreen from "@screens/shop/ShopScreen";
+import ShopScreen from "@screens/shop/main/ShopScreen";
 import {
   UserDataContext,
   ChatContext,
@@ -32,7 +32,7 @@ import ExploreSearchScreen from "@screens/explore/exploreSearch/ExploreSearchScr
 import CharacterScreen from "@screens/explore/characterDetail/CharacterScreen";
 import Purchases from "react-native-purchases";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import ContactScreen from "@screens/shop/ContactScreen";
+import ContactScreen from "@screens/shop/contact/ContactScreen";
 
 const nativeBaseTheme = extendTheme({
   colors: {
@@ -187,7 +187,6 @@ export default function App() {
   const [subscription, setSubscription] = useState<boolean>(false);
   const [credits, setCredits] = useState<number>(0);
   const [maxChats, setMaxChats] = useState<number>(0);
-  const [appIsReady, setAppIsReady] = useState(false);
   const [appIsLoaded, setAppIsLoaded] = useState(false);
   const [allCategories, setAllCategories] = useState<CategoryCharacters[]>([]);
   const [allCharacters, setAllCharacters] = useState<Character[]>([]);
