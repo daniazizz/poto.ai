@@ -12,6 +12,7 @@ module.exports = function (api) {
             "@screens": "./app/screens",
             "@contexts": "./app/contexts",
             "@services": "./app/services",
+            "@~types": "./app/types",
             "@app": "./app",
             "@root": "./",
           },

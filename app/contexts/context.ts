@@ -1,7 +1,7 @@
 import { createContext } from "react";
-import { Chat, ChatMessage } from "@services/chatService";
-import { AppUser } from "@services/userService";
-import { CategoryCharacters, Character } from "@services/charactersService";
+import { AppUser } from "../types/userTypes";
+import { Chat, ChatMessage } from "../types/chatTypes";
+import { Character, CategoryCharacters } from "../types/characterTypes";
 
 interface ChatContextProps {
   chats: Chat[];

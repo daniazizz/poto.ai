@@ -1,22 +1,7 @@
+import { Chat } from "@~types/chatTypes";
 import api from "./apiService";
-import { Character } from "./charactersService";
 
 const endpoint = "/chats/";
-
-type Sender = "user" | "character";
-
-export interface ChatMessage {
-  id?: string;
-  content: string;
-  sender: Sender;
-  created_at?: string;
-}
-
-export interface Chat {
-  id: string;
-  messages: ChatMessage[];
-  character_info: Character;
-}
 
 const getChats = () => {
   return api.instance.get<Chat[]>(endpoint);

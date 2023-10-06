@@ -1,6 +1,6 @@
 import { HStack, Text, VStack, ChevronLeftIcon, Pressable } from "native-base";
 import React from "react";
-import { Character } from "@services/charactersService";
+import { Character } from "@~types/characterTypes";
 import CharacterAvatar from "@components/common/CharacterAvatar";
 
 interface Props {

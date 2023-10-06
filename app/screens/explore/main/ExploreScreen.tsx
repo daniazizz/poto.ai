@@ -9,7 +9,7 @@ import {
 } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 import SearchBar from "../exploreSearch/components/SearchBar";
-import { CategoryCharacters, Character } from "@services/charactersService";
+import { CategoryCharacters, Character } from "@~types/characterTypes";
 import CharacterAvatar from "@components/common/CharacterAvatar";
 import LoadingWrapper from "@components/common/LoadingWrapper";
 import { CharacterContext } from "@contexts/context";

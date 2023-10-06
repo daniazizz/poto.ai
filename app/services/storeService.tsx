@@ -1,15 +1,13 @@
 import api from "./apiService";
 import { packs } from "../screens/shop/packs.json";
-import { UserData } from "./userService";
+import { UserData } from "@app/types/userTypes";
 
 const endpoint = "/process_purchase";
-
-export type ProductId = "pack1" | "pack2" | "pack3";
 
 const processPurchase = (
   receipt: string,
   purchaseType: "credits" | "subscription",
-  productId: ProductId
+  productId: "pack1" | "pack2" | "pack3"
 ) => {
   const amount = packs.find((pack) => pack.id === productId)?.amount;
   return api.instance.post<UserData>(endpoint, {

@@ -1,8 +1,8 @@
 import React from "react";
 import { Text, Pressable, VStack, HStack } from "native-base";
 import { useNavigation } from "@react-navigation/native";
-import { Chat } from "@services/chatService";
 import CharacterAvatar from "@components/common/CharacterAvatar";
+import { Chat } from "@~types/chatTypes";
 
 const ChatListItem = React.memo(({ chat: item }: { chat: Chat }) => {
   const navigation = useNavigation();

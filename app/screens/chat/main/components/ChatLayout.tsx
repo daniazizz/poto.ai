@@ -18,8 +18,9 @@ import { Ionicons } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
 import { MaterialIcons } from "@expo/vector-icons";
 
-import charactersService, { Character } from "@services/charactersService";
-import { Chat } from "@services/chatService";
+import charactersService from "@services/charactersService";
+import { Character } from "@~types/characterTypes";
+import { Chat } from "@~types/chatTypes";
 import ChatHeader from "./ChatHeader";
 import { ChatContext, UserDataContext } from "@contexts/context";
 import SuggestionList from "./suggestions/SuggestionList";

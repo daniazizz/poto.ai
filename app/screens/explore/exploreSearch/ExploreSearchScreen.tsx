@@ -12,7 +12,7 @@ import React from "react";
 import SearchBar from "./components/SearchBar";
 
 import { useNavigation } from "@react-navigation/native";
-import { Character } from "@services/charactersService";
+import { Character } from "@~types/characterTypes";
 import { RouteProp, useRoute } from "@react-navigation/native";
 import debounce from "lodash.debounce";
 import CharacterAvatar from "@components/common/CharacterAvatar";
