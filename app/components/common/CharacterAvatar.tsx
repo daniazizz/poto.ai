@@ -1,6 +1,7 @@
-import { Avatar } from "native-base";
+import { Avatar, Box, StyledProps } from "native-base";
 import { InterfaceAvatarProps } from "native-base/lib/typescript/components/composites/Avatar/types";
 import React from "react";
+import { ViewProps } from "react-native";
 import FastImage from "react-native-fast-image";
 
 interface Props extends InterfaceAvatarProps {
