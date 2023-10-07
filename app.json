@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Thinketh",
+    "name": "Thoughts - AI Chat",
     "slug": "thinketh",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -14,14 +14,14 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "thinketh.apk"
+      "bundleIdentifier": "com.thoughtsai.app"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#090909"
       },
-      "package": "thinketh.apk"
+      "package": "com.thoughtsai.app"
     },
     "web": {
       "favicon": "./assets/favicon.png"
