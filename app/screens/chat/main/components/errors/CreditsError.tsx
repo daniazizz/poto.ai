@@ -8,7 +8,6 @@ const CreditsError = () => {
     <VStack
       justifyContent={"center"}
       alignItems={"center"}
-      //   bgColor={"gray.600"}
       mx={2}
       p={2}
       rounded={"xl"}

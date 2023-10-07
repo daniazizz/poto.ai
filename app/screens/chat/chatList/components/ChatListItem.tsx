@@ -3,6 +3,7 @@ import { Text, Pressable, VStack, HStack } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 import CharacterAvatar from "@components/common/CharacterAvatar";
 import { Chat } from "@~types/chatTypes";
+import constants from "@constants/constants";
 
 const ChatListItem = React.memo(({ chat: item }: { chat: Chat }) => {
   const navigation = useNavigation();
@@ -17,7 +18,7 @@ const ChatListItem = React.memo(({ chat: item }: { chat: Chat }) => {
           params: { chat: item, character: item.character_info },
         } as never)
       }
-      bgColor={"gray.800"}
+      bgColor={constants.SECUNDARY_COLOR}
       rounded={"xl"}
       h={"100px"}
       justifyContent={"center"}

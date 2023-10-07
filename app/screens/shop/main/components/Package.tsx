@@ -1,6 +1,7 @@
 import React from "react";
 import { VStack, HStack, Pressable, Text } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
+import constants from "@constants/constants";
 
 interface PackageProps {
   name: string;
@@ -17,7 +18,7 @@ const Package = (props: PackageProps) => {
   return (
     <Pressable style={{ width: "100%" }} onPress={props.onPress}>
       <HStack
-        bgColor={"gray.800"}
+        bgColor={constants.SECUNDARY_COLOR}
         rounded={"2xl"}
         p={4}
         px={5}

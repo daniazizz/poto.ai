@@ -2,6 +2,7 @@ import { HStack, Text, VStack, ChevronLeftIcon, Pressable } from "native-base";
 import React from "react";
 import { Character } from "@~types/characterTypes";
 import CharacterAvatar from "@components/common/CharacterAvatar";
+import constants from "@constants/constants";
 
 interface Props {
   handleReturn: () => void;
@@ -14,7 +15,7 @@ const ChatHeader = (props: Props) => {
       alignItems={"center"}
       justifyContent={"space-between"}
       p={4}
-      bgColor={"gray.900"}
+      bgColor={constants.PRIMARY_COLOR}
     >
       <HStack alignItems="center" space={3} flex={1}>
         <Pressable p={2} onPress={props.handleReturn}>

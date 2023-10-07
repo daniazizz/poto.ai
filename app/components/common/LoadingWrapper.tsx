@@ -1,3 +1,4 @@
+import constants from "@constants/constants";
 import { Box, Spinner } from "native-base";
 import React from "react";
 
@@ -21,7 +22,7 @@ const LoadingWrapper = (props: Props) => {
         >
           <Box
             p={5}
-            bgColor={"gray.900"}
+            bgColor={constants.BACKGROUND_COLOR}
             rounded={"lg"}
             alignItems={"center"}
             justifyContent={"center"}

@@ -1,3 +1,4 @@
+import constants from "@constants/constants";
 import { Avatar } from "native-base";
 import { InterfaceAvatarProps } from "native-base/lib/typescript/components/composites/Avatar/types";
 import React from "react";
@@ -10,7 +11,11 @@ interface Props extends InterfaceAvatarProps {
 
 const CharacterAvatar = (props: Props) => {
   return (
-    <Avatar style={props.style} size={props.size} bgColor={"gray.600"}>
+    <Avatar
+      style={props.style}
+      size={props.size}
+      bgColor={constants.SECUNDARY_COLOR}
+    >
       {props.image ? (
         <FastImage
           source={{

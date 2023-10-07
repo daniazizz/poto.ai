@@ -15,6 +15,7 @@ import { SafeAreaView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import storeService, { Issue } from "@services/storeService";
+import constants from "@constants/constants";
 
 const isValidEmail = (email: string) => {
   // Basic email validation, you can use a more comprehensive regex or library
@@ -229,7 +230,7 @@ const ContactScreen = () => {
             alignItems={"center"}
             justifyContent={"center"}
             p={5}
-            bgColor={"blue.600"}
+            bgColor={constants.BUTTON_COLOR}
             mx={5}
             rounded={"2xl"}
             opacity={loading || success ? 0.7 : 1}

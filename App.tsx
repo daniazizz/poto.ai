@@ -57,8 +57,8 @@ const navigatorTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    background: "#18181b",
-    card: "#18181b",
+    background: "black",
+    card: "#121212",
     text: "rgb(255, 255, 255)",
   },
 };
@@ -297,7 +297,7 @@ export default function App() {
         AsyncStorage.setItem("reviewed", "false");
       }
     });
-    AsyncStorage.getItem("actionsUntilReview").then((value) => {
+    AsyncStorage.getItem("actionsUntilReview ").then((value) => {
       if (value === null) {
         AsyncStorage.setItem("actionsUntilReview", "7");
       }

@@ -7,6 +7,7 @@ import { Ionicons } from "@expo/vector-icons";
 import FastImage from "react-native-fast-image";
 import { SafeAreaView } from "react-native";
 import { MainStackParamList } from "@root/App";
+import constants from "@constants/constants";
 
 const CharacterScreen = () => {
   const navigation = useNavigation();
@@ -33,7 +34,7 @@ const CharacterScreen = () => {
         <Box
           rounded={"full"}
           p={2}
-          bgColor={"gray.900"}
+          bgColor={constants.PRIMARY_COLOR}
           // borderColor={"white"}
           // borderWidth={1}
         >
@@ -81,7 +82,7 @@ const CharacterScreen = () => {
         <Box
           rounded={"full"}
           p={2}
-          bgColor={"blue.600"}
+          bgColor={constants.BUTTON_COLOR}
           px={4}
           style={{
             elevation: 5,

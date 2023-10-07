@@ -55,6 +55,7 @@ const ExploreSearchScreen = () => {
     <SafeAreaView style={{ backgroundColor: "black", flex: 1 }}>
       <KeyboardAvoidingView behavior={"padding"} flex={1}>
         <VStack space="5" height={"100%"} w={"100%"} alignItems={"center"}>
+          {/* HEADER */}
           <HStack py={1} alignItems={"center"}>
             <Pressable
               onPress={() => {

@@ -3,6 +3,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import React, { useContext } from "react";
 import { useNavigation } from "@react-navigation/core";
 import { UserDataContext } from "@contexts/context";
+import constants from "@constants/constants";
 
 const HeaderRight = () => {
   const navigation = useNavigation();
@@ -12,7 +13,7 @@ const HeaderRight = () => {
     <HStack space="3" alignItems="center" px={4}>
       <Pressable onPress={() => navigation.navigate({ name: "Shop" } as never)}>
         <Box
-          bgColor={"gray.600"}
+          bgColor={constants.SECUNDARY_COLOR}
           p={2}
           px={3}
           borderRadius={40}

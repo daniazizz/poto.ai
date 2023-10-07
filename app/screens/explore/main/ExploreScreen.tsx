@@ -13,6 +13,7 @@ import { CategoryCharacters, Character } from "@~types/characterTypes";
 import CharacterAvatar from "@components/common/CharacterAvatar";
 import LoadingWrapper from "@components/common/LoadingWrapper";
 import { CharacterContext } from "@contexts/context";
+import constants from "@constants/constants";
 
 interface CharacterItemProps {
   char: Character;
@@ -60,7 +61,7 @@ interface CharacterListProps {
 const CharacterList = React.memo(
   ({ data, categoryName }: CharacterListProps) => {
     return (
-      <VStack space="5" my={2} bgColor={"gray.800"} py={3}>
+      <VStack space="5" my={2} bgColor={constants.PRIMARY_COLOR} py={3}>
         <Text fontSize="xl" fontWeight={"semibold"} pl={3} color={"white"}>
           {categoryName}
         </Text>
@@ -104,7 +105,7 @@ const CharacterListCategory = React.memo(
             value=""
           />
         }
-        ListHeaderComponentStyle={{ paddingBottom: 20 }}
+        ListHeaderComponentStyle={{ paddingBottom: 10 }}
         // keyboardShouldPersistTaps="handled"
         initialNumToRender={3}
         // windowSize={3}
@@ -134,7 +135,7 @@ const LoadingSkeleton = React.memo(() => {
       data={[1, 2, 3, 4, 5, 6, 7]}
       keyExtractor={(item) => item.toString()}
       renderItem={({ item: cat, index: idx }) => (
-        <VStack height={225} mb={5} bgColor={"gray.800"}>
+        <VStack height={225} mb={5} bgColor={constants.PRIMARY_COLOR}>
           <Skeleton.Text lines={1} w={250} p={5} />
           <HStack alignItems={"center"}>
             <FlatList
@@ -165,7 +166,7 @@ const ExploreScreen = () => {
 
   return (
     <LoadingWrapper loading={loading}>
-      <VStack h={"full"} w={"full"}>
+      <VStack h={"full"} w={"full"} pt={2}>
         {allCategories.length === 0 ? (
           <LoadingSkeleton />
         ) : (

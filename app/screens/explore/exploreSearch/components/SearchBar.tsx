@@ -2,6 +2,7 @@ import { HStack, Pressable } from "native-base";
 import React from "react";
 import { TextInput } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+import constants from "@constants/constants";
 
 interface Props {
   disabled?: boolean;
@@ -14,8 +15,7 @@ interface Props {
 const SearchBar = (props: Props) => {
   return (
     <HStack
-      // bg={"gray.800"}
-      bgColor={"white"}
+      bg={constants.SECUNDARY_COLOR}
       rounded={"xl"}
       p={2}
       mx={2}
@@ -24,7 +24,7 @@ const SearchBar = (props: Props) => {
     >
       <MaterialIcons name="search" size={24} color="gray" />
       <TextInput
-        style={{ flex: 1, fontSize: 18, color: "black" }}
+        style={{ flex: 1, fontSize: 18, color: "white" }}
         keyboardAppearance="dark"
         placeholder="Search"
         placeholderTextColor={"gray"}
@@ -32,9 +32,6 @@ const SearchBar = (props: Props) => {
         autoFocus={props.autoFocus}
         value={props.value}
         onChangeText={props.onChangeText}
-
-        // value={search}
-        // onChangeText={handleFilter}
       />
       {props.value && props.value.length > 0 && (
         <Pressable onPress={() => props.onChangeText("")}>

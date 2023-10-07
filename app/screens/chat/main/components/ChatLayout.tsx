@@ -25,6 +25,7 @@ import ChatHeader from "./ChatHeader";
 import { ChatContext, UserDataContext } from "@contexts/context";
 import SuggestionList from "./suggestions/SuggestionList";
 import CharacterAvatar from "@components/common/CharacterAvatar";
+import constants from "@constants/constants";
 
 const CustomBubble = React.memo((props: BubbleProps<IMessage>) => {
   const theme = useTheme();
@@ -112,7 +113,7 @@ const OutOfCredits = () => {
       mx={3}
       p={3}
       rounded={"xl"}
-      bgColor={"gray.900"}
+      bgColor={constants.PRIMARY_COLOR}
     >
       <Text fontSize={30}>💭</Text>
       <Text color={"white"} fontSize={18} fontWeight={500}>
@@ -122,8 +123,18 @@ const OutOfCredits = () => {
         Come back tomorrow or
       </Text>
       <Pressable onPress={() => navigation.navigate({ name: "Shop" } as never)}>
-        <Box p={2} px={6} bgColor={"blue.500"} rounded={"xl"} mt={2}>
-          <Text color={"white"} fontSize={16} fontWeight={600}>
+        <Box
+          p={2}
+          px={6}
+          bgColor={constants.BUTTON_COLOR}
+          rounded={"xl"}
+          mt={2}
+        >
+          <Text
+            color={constants.BUTTON_TEXT_COLOR}
+            fontSize={16}
+            fontWeight={600}
+          >
             Refill
           </Text>
         </Box>
@@ -141,7 +152,7 @@ const NetworkError = () => {
       mx={3}
       p={3}
       rounded={"xl"}
-      bgColor={"gray.900"}
+      bgColor={constants.PRIMARY_COLOR}
     >
       <Ionicons name="ios-wifi" size={35} color="white" />
       <Text color={"white"} fontSize={18} fontWeight={500}>
@@ -427,7 +438,7 @@ const ChatLayout2 = (props: Props) => {
                   rounded={"xl"}
                   p={2}
                   px={3}
-                  bgColor={"blue.500"}
+                  bgColor={constants.BUTTON_COLOR}
                   opacity={props.text?.length === 0 || sendDisabled ? 0.5 : 1}
                 >
                   <MaterialIcons name="arrow-upward" size={30} color="white" />

@@ -10,6 +10,7 @@ import { packs } from "@constants/packs.json";
 import { UserDataContext } from "@contexts/context";
 import Purchases, { PurchasesStoreProduct } from "react-native-purchases";
 import Package from "./components/Package";
+import constants from "@constants/constants";
 
 const ShopScreen = () => {
   const [products, setProducts] = React.useState<PurchasesStoreProduct[]>([]);
@@ -177,7 +178,7 @@ const ShopScreen = () => {
               alignItems={"center"}
               justifyContent={"space-between"}
               p={5}
-              bgColor={"blue.600"}
+              bgColor={constants.BUTTON_COLOR}
               mx={5}
               rounded={"2xl"}
               opacity={loading ? 0.5 : 1}
