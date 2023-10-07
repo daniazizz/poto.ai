@@ -11,24 +11,24 @@ const HeaderRight = () => {
   const theme = useTheme();
   return (
     <HStack space="3" alignItems="center" px={4}>
-      <Pressable onPress={() => navigation.navigate({ name: "Shop" } as never)}>
-        <Box
-          bgColor={constants.SECUNDARY_COLOR}
-          p={2}
-          px={3}
-          borderRadius={40}
-          display={"flex"}
-          flexDirection={"row"}
-          style={{ gap: 10 }}
-          alignItems={"center"}
-        >
-          <Text fontSize="sm" fontWeight={700} color={"white"}>
-            {credits}
-          </Text>
-          {/* <MaterialIcons name="auto-awesome" size={24} color="white" /> */}
-          <MaterialIcons name="confirmation-num" size={18} color="white" />
-        </Box>
-      </Pressable>
+      {/* <Pressable onPress={() => navigation.navigate({ name: "Shop" } as never)}> */}
+      <Box
+        bgColor={constants.SECUNDARY_COLOR}
+        p={2}
+        px={3}
+        borderRadius={40}
+        display={"flex"}
+        flexDirection={"row"}
+        style={{ gap: 10 }}
+        alignItems={"center"}
+      >
+        <Text fontSize="sm" fontWeight={700} color={"white"}>
+          {credits}
+        </Text>
+        {/* <MaterialIcons name="auto-awesome" size={24} color="white" /> */}
+        <MaterialIcons name="confirmation-num" size={18} color="white" />
+      </Box>
+      {/* </Pressable> */}
 
       {/* <MaterialIcons name="account-circle" size={50} color="white" /> */}
       {/* <Pressable

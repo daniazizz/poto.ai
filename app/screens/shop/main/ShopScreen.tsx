@@ -32,23 +32,23 @@ const ShopScreen = () => {
 
   const purchase = (product: PurchasesStoreProduct) => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-    try {
-      setLoading(true);
-      Purchases.purchaseStoreProduct(product)
-        .then((res) => {
-          console.log(res);
-          const pack = packs.find((pack) => pack.id === product.identifier);
-          if (pack) {
-            setCredits(credits + pack.amount);
-          }
-          navigation.goBack();
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    } catch (err: any) {
-      console.warn(err.code, err.message);
-    }
+    // try {
+    //   setLoading(true);
+    //   Purchases.purchaseStoreProduct(product)
+    //     .then((res) => {
+    //       console.log(res);
+    //       const pack = packs.find((pack) => pack.id === product.identifier);
+    //       if (pack) {
+    //         setCredits(credits + pack.amount);
+    //       }
+    //       navigation.goBack();
+    //     })
+    //     .finally(() => {
+    //       setLoading(false);
+    //     });
+    // } catch (err: any) {
+    //   console.warn(err.code, err.message);
+    // }
   };
 
   return (

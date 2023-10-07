@@ -246,24 +246,24 @@ export default function App() {
   }, [appIsLoaded]);
 
   // IN APP PURCHASES
-  useEffect(() => {
-    if (user) {
-      console.log(user.uid);
-      Purchases.setLogLevel(Purchases.LOG_LEVEL.DEBUG);
+  // useEffect(() => {
+  //   if (user) {
+  //     console.log(user.uid);
+  //     Purchases.setLogLevel(Purchases.LOG_LEVEL.DEBUG);
 
-      if (Platform.OS === "ios") {
-        Purchases.configure({
-          apiKey: "appl_PORutsiLWByHNYbeTWCcivuruhl",
-          appUserID: user.uid,
-        });
-      } else if (Platform.OS === "android") {
-        Purchases.configure({
-          apiKey: "<public_google_api_key>",
-          appUserID: user.uid,
-        });
-      }
-    }
-  }, [user]);
+  //     if (Platform.OS === "ios") {
+  //       Purchases.configure({
+  //         apiKey: "appl_PORutsiLWByHNYbeTWCcivuruhl",
+  //         appUserID: user.uid,
+  //       });
+  //     } else if (Platform.OS === "android") {
+  //       Purchases.configure({
+  //         apiKey: "<public_google_api_key>",
+  //         appUserID: user.uid,
+  //       });
+  //     }
+  //   }
+  // }, [user]);
 
   // GET ALL CHARACTERS
   useEffect(() => {
