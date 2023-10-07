@@ -16,7 +16,7 @@ const ChatScreen = () => {
   const { newChat } = useContext(ChatContext);
   const [chat, setChat] = useState<Chat | undefined>(params.chat);
 
-  console.log("chatscreen");
+  // console.log("chatscreen");
 
   React.useEffect(() => {
     // console.log(route.params);
@@ -27,7 +27,7 @@ const ChatScreen = () => {
           setChat(chat);
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
           navigation.goBack();
         })
         .finally(() => {

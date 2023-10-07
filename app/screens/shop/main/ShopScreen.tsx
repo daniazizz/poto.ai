@@ -21,7 +21,7 @@ const ShopScreen = () => {
 
   useEffect(() => {
     Purchases.getProducts(packs.map((pack) => pack.id)).then((res) => {
-      console.log(res);
+      // console.log(res);
       const sorted = res.sort((a, b) => {
         return Number(a.price) - Number(b.price);
       });

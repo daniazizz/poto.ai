@@ -8,7 +8,7 @@ import constants from "@constants/constants";
 const ChatListItem = React.memo(({ chat: item }: { chat: Chat }) => {
   const navigation = useNavigation();
 
-  console.log("chatlistitem");
+  // console.log("chatlistitem");
 
   return (
     <Pressable

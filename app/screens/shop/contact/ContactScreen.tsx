@@ -68,7 +68,7 @@ const ContactScreen = () => {
     }
 
     setErrors(errors);
-    console.log(errors);
+    // console.log(errors);
 
     return Object.values(errors).every((err) => err.length === 0);
   };
@@ -82,20 +82,20 @@ const ContactScreen = () => {
       storeService
         .sendIssue(issue)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           setSuccess(true);
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
           setNetworkError(true);
         })
         .finally(() => {
           setLoading(false);
         });
-      console.log("Submitting issue:", issue);
+      // console.log("Submitting issue:", issue);
     }
   };
-  console.log("contact screen");
+  // console.log("contact screen");
 
   return (
     <SafeAreaView style={{ flex: 1, width: "100%", height: "100%" }}>

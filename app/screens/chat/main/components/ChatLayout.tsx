@@ -208,7 +208,7 @@ const checkReview = () => {
                   })
                   .catch((err) => {
                     AsyncStorage.setItem("actionsUntilReview", "7");
-                    console.log(err);
+                    // console.log(err);
                   });
               }
             });
@@ -278,7 +278,7 @@ const ChatLayout2 = (props: Props) => {
               ),
       },
     }));
-    console.log(messages);
+    // console.log(messages);
     // REVERSE THE MESSAGES
     setMessages(messages.reverse());
   }, []);
@@ -359,7 +359,7 @@ const ChatLayout2 = (props: Props) => {
         } else {
           setError("network");
         }
-        console.log(errorCode);
+        // console.log(errorCode);
         // setError(errorCode);
       })
       .finally(() => {

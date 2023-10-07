@@ -25,7 +25,7 @@ const CharacterItem = React.memo(({ char }: CharacterItemProps) => {
   return (
     <Pressable
       onPress={() => {
-        console.log(char);
+        // console.log(char);
         navigation.navigate({
           name: "CharacterScreen",
           params: { character: char },

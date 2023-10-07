@@ -14,7 +14,7 @@ const CharacterScreen = () => {
   const route = useRoute<RouteProp<MainStackParamList, "CharacterScreen">>();
   const params: { character: Character } = route.params;
 
-  console.log(params.character);
+  // console.log(params.character);
   const handleStartChat = () => {
     navigation.navigate({
       name: "ChatScreen",

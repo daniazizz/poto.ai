@@ -218,7 +218,7 @@ export default function App() {
                       setAppUser(data);
                     }),
                     chatService.getChats().then(({ data }) => {
-                      console.log(data.length);
+                      // console.log(data.length);
                       setChats(data);
                     }),
                   ]);
@@ -284,7 +284,7 @@ export default function App() {
           setAllCharacters([...new Set(characters)]);
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
         });
     }
   }, [user]);
