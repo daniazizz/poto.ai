@@ -4,7 +4,6 @@ import { Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { MaterialIcons } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
 import { packs } from "@constants/packs.json";
 import { UserDataContext } from "@contexts/context";
