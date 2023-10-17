@@ -22,7 +22,7 @@ Whether you're a history enthusiast looking to learn from the great minds of the
 
 **Server:** Python, Django, Django Rest Framework, LangChain
 
-**Platform:** Azure, Amazon AWS (_Lambda Function_), Firebase (_Authentication_), OpenAI ChatGPT API
+**Platform:** Azure, Firebase (_Authentication_), OpenAI ChatGPT API
 
 ## Screenshots
 
